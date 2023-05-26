@@ -1,0 +1,7 @@
+{
+  "name": "AppBase",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
