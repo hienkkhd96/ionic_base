@@ -13,10 +13,10 @@ import ExploreContainer from "../components/ExploreContainer";
 import "./Tab2.css";
 import { useEffect } from "react";
 
+import { log } from "console";
 const Tab2: React.FC = () => {
   const hideTabBar = (): void => {
     const tabBar = document.querySelector("ion-tab-bar");
-    console.log(tabBar);
     if (tabBar !== null) {
       tabBar.style.display = "none";
     }
@@ -27,12 +27,7 @@ const Tab2: React.FC = () => {
       tabBar.style.display = "flex";
     }
   };
-  useIonViewDidEnter(() => {
-    hideTabBar(); 
-  });
-  useIonViewDidLeave(() => {
-    showTabBar();
-  });
+
   return (
     <IonPage>
       <IonHeader>

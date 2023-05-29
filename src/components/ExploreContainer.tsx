@@ -6,7 +6,11 @@ import {
   increment,
   setValue,
 } from "../features/counter/counterSlice";
-
+import {
+  BiometricAuth,
+  BiometryType,
+} from "@aparajita/capacitor-biometric-auth";
+import { error } from "console";
 interface ContainerProps {
   name: string;
 }
@@ -14,7 +18,21 @@ interface ContainerProps {
 const ExploreContainer: React.FC<ContainerProps> = ({ name }) => {
   const { counter, user } = useSelector((state): any => state);
   const dispatch = useDispatch();
+  console.log();
 
+  const openId = async () => {
+    const res = await BiometricAuth.checkBiometry();
+    if (res.isAvailable) {
+      const res = BiometricAuth.authenticate()
+        .then(() => {
+          alert(123);
+          return;
+        })
+        .catch((error) => {
+          alert(error);
+        });
+    }
+  };
   return (
     <div className="mx-auto container">
       <strong>{name}</strong>
@@ -32,6 +50,7 @@ const ExploreContainer: React.FC<ContainerProps> = ({ name }) => {
         <IonButton onClick={() => dispatch(increment())}>Increment</IonButton>
         <IonButton onClick={() => dispatch(decrement())}>Decrement</IonButton>
         <IonButton onClick={() => dispatch(setValue(0))}>Set to 0</IonButton>
+        <IonButton onClick={() => openId()}>openID</IonButton>
       </div>
     </div>
   );
